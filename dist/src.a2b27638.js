@@ -118,7 +118,9 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"src/index.js":[function(require,module,exports) {
-// const,letなどの変数宣言
+/**
+ * const,letなどの変数宣言
+ */
 
 // var val1 = "var変数";
 // console.log(val1);
@@ -159,11 +161,46 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 // val4.address = "Mito";
 // console.log(val4);
 
-// constで定義した配列はプロパティの変更が可能
-var val5 = ["dog", "cat"];
-val5[0] = "bird";
-val5.push("monkey");
-console.log(val5);
+// // constで定義した配列はプロパティの変更が可能
+// const val5 = ["dog", "cat"];
+// val5[0] = "bird";
+// val5.push("monkey");
+// console.log(val5);
+
+/**
+ * テンプレート文字列
+ */
+
+// const name = "じゃけ";
+// const age = 30;
+// // 「私の名前はじゃけ、年齢は30です。」
+
+// // 従来
+// const message1 = "私の名前は" + name + "です。年齢は" + age + "です";
+// console.log(message1);
+
+// // テンプレート文字列を用いると
+// const messsage2 = `私の名前は${name}です。年齢は${age}です！`;
+// console.log(messsage2);
+
+/**
+ * アロー関数
+ */
+
+// 従来
+// function func1(str) {
+//   return str;
+// }
+var func1 = function func1(str) {
+  return str;
+};
+console.log(func1("func1です"));
+
+// アロー関数
+var func2 = function func2(str) {
+  return str;
+};
+console.log(func2("func2です"));
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
