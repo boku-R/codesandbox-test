@@ -179,6 +179,16 @@ require("./styles.css");
 var onClickAdd = function onClickAdd() {
   // テキストボックスの値を取得し、初期化する
   var inputText = document.getElementById("add-text").value;
+  createInconpleteList(inputText);
+};
+
+// 未完了のTODOリストから指定の要素を削除する関数
+var deleteFromIncompleteList = function deleteFromIncompleteList(target) {
+  document.getElementById("incomplete-list").removeChild(target);
+};
+
+// 未完了のリストに追加する関数
+var createInconpleteList = function createInconpleteList(text) {
   document.getElementById("add-text").value = "";
 
   // div生成
@@ -188,7 +198,7 @@ var onClickAdd = function onClickAdd() {
 
   // pタグ生成
   var p = document.createElement("p");
-  p.innerText = inputText;
+  p.innerText = text;
 
   // button(完了)タグ作成
   var completeButton = document.createElement("button");
@@ -213,6 +223,15 @@ var onClickAdd = function onClickAdd() {
     // buttonタグ生成
     var backButton = document.createElement("button");
     backButton.innerText = "戻す";
+    backButton.addEventListener("click", function () {
+      // 押された戻すボタンの親タグを完了リストから削除
+      var deleteTarget = backButton.parentNode.parentNode;
+      document.getElementById("complete-list").removeChild(deleteTarget);
+
+      // テキストを取得
+      var text = backButton.parentNode.firstElementChild.innerText;
+      createInconpleteList(text);
+    });
 
     // divタグの子要素に各要素を設定
     addTarget.appendChild(p);
@@ -221,20 +240,9 @@ var onClickAdd = function onClickAdd() {
     // liタグを生成
     var li = document.createElement("li");
     li.appendChild(addTarget);
-    console.log(li);
 
     // 完了リストに追加
     document.getElementById("complete-list").appendChild(li);
-
-    // const completeTarget = completeButton.parentNode.parentNode;
-
-    // 完了リストに追加
-    // const todoText = completeButton.parentElement.innerText;
-    // console.log(todoText);
-    // document.getElementById("complete-area").appendChild(li);
-
-    // // 未完了リストから削除
-    // document.getElementById("incomplete-list").removeChild(completeTarget);
   });
 
   // button(削除)タグ作成
@@ -256,13 +264,6 @@ var onClickAdd = function onClickAdd() {
 
   // 未完了リストに追加
   document.getElementById("incomplete-list").appendChild(li);
-
-  // alert(inputText);
-};
-
-// 未完了のTODOリストから指定の要素を削除する関数
-var deleteFromIncompleteList = function deleteFromIncompleteList(target) {
-  document.getElementById("incomplete-list").removeChild(target);
 };
 document.getElementById("add-button").addEventListener("click", function () {
   return onClickAdd();
